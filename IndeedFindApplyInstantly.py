@@ -86,4 +86,3 @@ print(jobs_not_in)
 
 filter_search = input("Would you like to filter your search by a keyword? Y/N: ")
 
-#add something
