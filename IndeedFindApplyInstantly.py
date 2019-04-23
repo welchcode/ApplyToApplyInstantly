@@ -54,7 +54,6 @@ def find_jobs(location,job_type,number_of_searches):
 				#find the job title if it does
 				job_text = card.find('div',attrs={"class":"title"}).text.strip()
 			
-			
 				#find the 'a' tag in the card			
 				a = card.find('a')
 			
