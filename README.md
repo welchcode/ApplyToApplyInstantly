@@ -15,3 +15,5 @@ Planned Features
 
 I plan to implement more user friendly search parameters and allow users to specify how many UNIQUE jobs they would like to find that are also classified as 'Apply instantly'
 More to come...
+
+I also plan on implementing the current code as a class and use functions instead. What I have now is a current rought draft.
