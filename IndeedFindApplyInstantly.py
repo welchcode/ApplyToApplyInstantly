@@ -77,7 +77,6 @@ while start !=  number_of_searches:
 	start = start + 10
 
 
-
 print (str(count) + ' jobs found matching your criteria.')
 print (str(jobs_not_included) + ' jobs were found that were not classified as "Apply instantly".')
 print()
