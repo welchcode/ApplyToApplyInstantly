@@ -4,8 +4,7 @@ This project is intended to allow users to automatically apply to 'apply instant
 So far this project features a web scraper, using BeautifulSoup, to find jobs that are classified as 'apply instantly' and that are classified based on user's input parameters.
 Currently this program returns a list of jobs to the user that are classified as 'Apply instantly,' as well as links to each job.
 
-For mac users: hold control over the link and click apply
-
+For Mac/Windows users: hold control over the link and click apply
 
 Known Bugs
 
