@@ -8,9 +8,11 @@ For mac users: hold control over the link and click apply
 
 
 Known Bugs
+
 So far I have come noticed one feature/bug that needs to be addressed. Users of this program need to be able to specify their city AND state. So far this program only works well with major metropolitan areas.
 
 
 Planned Features
+
 I plan to implement more user friendly search parameters and allow users to specify how many UNIQUE jobs they would like to find that are also classified as 'Apply instantly'
 More to come...
