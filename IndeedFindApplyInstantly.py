@@ -8,7 +8,6 @@ print('WELCOME TO INDEED EASY APPLY VERSION 1.0')
 print('----------')
 print()
 
-
 #10 jobs per page on indeed
 start = 10
 #used to count number of jobs
