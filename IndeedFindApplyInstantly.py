@@ -32,48 +32,53 @@ jobs_not_included = 0
 jobs_not_in = ''
 
 
-#loops the number of times you input
-while start !=  number_of_searches:
-	
-	#unique request url based on location and job type
-	request = 'https://www.indeed.com/jobs?q='+job_type.strip()+'&l='+location.strip()+'&start=' + str(start)
-	open_request = urllib.request.urlopen(request)
-	job_search_soup = BeautifulSoup(open_request,'html.parser')	
-	
-	#specific card found in search -- these are just the search results for the jobs that pop up
-	click_cards = job_search_soup.find_all('div',attrs={"class":"jobsearch-SerpJobCard"})
-	
-	#check each card in the list of cards
-	for card in click_cards:
-		#checking if card has the 'Apply instantly' feature
-		if card.find('span',attrs={"class":"iaLabel"}) is not None and card.find('span',attrs={"class":"iaLabel"}).text == 'Apply instantly':
 
-			#find the job title if it does
-			job_text = card.find('div',attrs={"class":"title"}).text.strip()
+def find_jobs(location,job_type,number_of_searches):
+	global start, count, jobs_not_included, jobs_not_in
+	#loops the number of times you input
+	while start !=  number_of_searches:
+	
+		#unique request url based on location and job type
+		request = 'https://www.indeed.com/jobs?q='+job_type.strip()+'&l='+location.strip()+'&start=' + str(start)
+		open_request = urllib.request.urlopen(request)
+		job_search_soup = BeautifulSoup(open_request,'html.parser')	
+	
+		#specific card found in search -- these are just the search results for the jobs that pop up
+		click_cards = job_search_soup.find_all('div',attrs={"class":"jobsearch-SerpJobCard"})
+	
+		#check each card in the list of cards
+		for card in click_cards:
+			#checking if card has the 'Apply instantly' feature
+			if card.find('span',attrs={"class":"iaLabel"}) is not None and card.find('span',attrs={"class":"iaLabel"}).text == 'Apply instantly':
+
+				#find the job title if it does
+				job_text = card.find('div',attrs={"class":"title"}).text.strip()
 			
 			
-			#find the 'a' tag in the card			
-			a = card.find('a')
+				#find the 'a' tag in the card			
+				a = card.find('a')
 			
-			#printing the name of the job				
-			print(job_text)
+				#printing the name of the job				
+				print(job_text)
 			
-			#printing the href link in the 'a' tag that is found
-			print('http://www.indeed.com'+a['href'])					
+				#printing the href link in the 'a' tag that is found
+				print('http://www.indeed.com'+a['href'])					
 				
-			#if it does then print 'Apply instantly'
-			print(card.find('span',attrs={"class":"iaLabel"}).text)
-			print()
-			print()
+				#if it does then print 'Apply instantly'
+				print(card.find('span',attrs={"class":"iaLabel"}).text)
+				print()
+				print()
 	
-			count = count + 1		
-		else:
-			#if the job is not 'Apply instantly' then it is added to the total and the list of jobs not included in the search
-			jobs_not_included = jobs_not_included + 1
-			jobs_not_in = jobs_not_in + card.find('div',attrs={"class":"title"}).text.strip()
+				count = count + 1		
+			else:
+				#if the job is not 'Apply instantly' then it is added to the total and the list of jobs not included in the search
+				jobs_not_included = jobs_not_included + 1
+				jobs_not_in = jobs_not_in + card.find('div',attrs={"class":"title"}).text.strip()
 
-	#incrementing the start var for the main while loop
-	start = start + 10
+		#incrementing the start var for the main while loop
+		start = start + 10
+
+find_jobs(location,job_type,number_of_searches)
 
 print (str(count) + ' jobs found matching your criteria.')
 print (str(jobs_not_included) + ' jobs were found that were not classified as "Apply instantly".')
