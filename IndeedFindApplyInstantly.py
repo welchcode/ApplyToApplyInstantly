@@ -75,7 +75,6 @@ while start !=  number_of_searches:
 	#incrementing the start var for the main while loop
 	start = start + 10
 
-
 print (str(count) + ' jobs found matching your criteria.')
 print (str(jobs_not_included) + ' jobs were found that were not classified as "Apply instantly".')
 print()
