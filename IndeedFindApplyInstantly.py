@@ -1,6 +1,7 @@
 import urllib.request
 from bs4 import BeautifulSoup
 import bs4
+
 print()
 print('----------')
 print('WELCOME TO INDEED EASY APPLY VERSION 1.0')
@@ -60,7 +61,7 @@ while start !=  number_of_searches:
 			
 			#printing the href link in the 'a' tag that is found
 			print('http://www.indeed.com'+a['href'])					
-			
+				
 			#if it does then print 'Apply instantly'
 			print(card.find('span',attrs={"class":"iaLabel"}).text)
 			print()
@@ -75,7 +76,8 @@ while start !=  number_of_searches:
 	#incrementing the start var for the main while loop
 	start = start + 10
 
-print()
+
+
 print (str(count) + ' jobs found matching your criteria.')
 print (str(jobs_not_included) + ' jobs were found that were not classified as "Apply instantly".')
 print()
