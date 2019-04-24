@@ -31,21 +31,23 @@ job_type = job_type.replace(' ', '-')
 jobs_not_included = 0
 jobs_not_in = ''
 
+job_list = []
+
 
 class Job:
-	def _init_(self,job_title,job_link):
+	def __init__(self,job_title,job_link):
 		self.job_title = job_title
 		self.job_link = job_link
 
-	def get_title():
+	def get_title(self):
 		return self.job_title
 
-	def get_link():
+	def get_link(self):
 		return self.job_link
 
 
 def find_jobs(location,job_type,number_of_searches):
-	global start, count, jobs_not_included, jobs_not_in
+	global start, count, jobs_not_included, jobs_not_in, job_list
 	#loops the number of times you input
 	while start !=  number_of_searches:
 	
@@ -59,25 +61,27 @@ def find_jobs(location,job_type,number_of_searches):
 	
 		#check each card in the list of cards
 		for card in click_cards:
-			#checking if card has the 'Apply instantly' feature
+
+			#checking if card has the 'Apply instantly' label
 			if card.find('span',attrs={"class":"iaLabel"}) is not None and card.find('span',attrs={"class":"iaLabel"}).text == 'Apply instantly':
 
 				#find the job title if it does
-				job_text = card.find('div',attrs={"class":"title"}).text.strip()
-			
+				job_title = card.find('div',attrs={"class":"title"}).text.strip()
+
 				#find the 'a' tag in the card			
 				a = card.find('a')
-			
-				#printing the name of the job				
-				print(job_text)
-			
-				#printing the href link in the 'a' tag that is found
-				print('http://www.indeed.com'+a['href'])					
-				
-				#if it does then print 'Apply instantly'
-				print(card.find('span',attrs={"class":"iaLabel"}).text)
-				print()
-				print()
+
+				#link for job
+				job_link = 'http://www.indeed.com'+a['href']
+
+				#creating object of job and adding it to the list of objects
+				j = Job(job_title,job_link)	
+				job_list.append(j)	
+							
+				#if it does then print 'Apply instantly' label ##### commenting out for now
+				#print(card.find('span',attrs={"class":"iaLabel"}).text)
+				#print()
+				#print()
 	
 				count = count + 1		
 			else:
@@ -90,11 +94,20 @@ def find_jobs(location,job_type,number_of_searches):
 
 find_jobs(location,job_type,number_of_searches)
 
-print (str(count) + ' jobs found matching your criteria.')
-print (str(jobs_not_included) + ' jobs were found that were not classified as "Apply instantly".')
-print()
-print()
-print('LIST OF JOBS NOT INCLUDED not classified as "Apply instantly"')
-print(jobs_not_in)
-print()
+
+if count != 0:
+	view = input('we have a list of ' + str(count) + ' jobs that we found matching your criteria, type "V" to view them: ')
+	print()
+	if view == 'V':
+		for j in job_list:
+			print(j.get_title())
+			print(j.get_link())
+			print()
+			print()
+		print('LIST OF JOBS NOT INCLUDED, not classified as "Apply instantly." There were a total of ' + str(jobs_not_included) + ' that did not match your criteria.')
+		print(jobs_not_in)
+else:
+	print('No jobs were found matching your criteria, please try again')
+
+
 
