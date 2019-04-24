@@ -31,6 +31,7 @@ job_type = job_type.replace(' ', '-')
 jobs_not_included = 0
 jobs_not_in = ''
 
+
 class Job:
 	def _init_(self,job_title,job_link):
 		self.job_title = job_title
@@ -41,6 +42,7 @@ class Job:
 
 	def get_link():
 		return self.job_link
+
 
 def find_jobs(location,job_type,number_of_searches):
 	global start, count, jobs_not_included, jobs_not_in
