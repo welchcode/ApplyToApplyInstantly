@@ -31,7 +31,16 @@ job_type = job_type.replace(' ', '-')
 jobs_not_included = 0
 jobs_not_in = ''
 
+class Job:
+	def _init_(self,job_title,job_link):
+		self.job_title = job_title
+		self.job_link = job_link
 
+	def get_title():
+		return self.job_title
+
+	def get_link():
+		return self.job_link
 
 def find_jobs(location,job_type,number_of_searches):
 	global start, count, jobs_not_included, jobs_not_in
@@ -87,4 +96,3 @@ print('LIST OF JOBS NOT INCLUDED not classified as "Apply instantly"')
 print(jobs_not_in)
 print()
 
-filter_search = input("Would you like to filter your search by a keyword? Y/N: ")
