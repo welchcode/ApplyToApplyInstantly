@@ -13,6 +13,8 @@ start = 10
 #used to count number of jobs
 count = 0
 
+#number of jobs that have the same job link returned from the list -> this happens rarely (if at all)
+not_unique_count = 0
 
 #The location, job type and how many jobs you would like to filter -- User Inputs
 location = input('Please enter a location: ')
@@ -48,6 +50,7 @@ class Job:
 
 def find_jobs(location,job_type,number_of_searches):
 	global start, count, jobs_not_included, jobs_not_in, job_list
+	unique_link = False
 	#loops the number of times you input
 	while start !=  number_of_searches:
 	
@@ -74,9 +77,20 @@ def find_jobs(location,job_type,number_of_searches):
 				#link for job
 				job_link = 'http://www.indeed.com'+a['href']
 
+				#checking if job_link is already in the list
+				if job_list:
+					for j in job_list:
+						if job_link != j.get_link:
+							unique_link = True
+						else:
+							unique_link = False
+							print('job is not unique')
+
 				#creating object of job and adding it to the list of objects
-				j = Job(job_title,job_link)	
-				job_list.append(j)	
+				if unique_link == True or not job_list:
+					j = Job(job_title,job_link)	
+					job_list.append(j)
+	
 							
 				#if it does then print 'Apply instantly' label ##### commenting out for now
 				#print(card.find('span',attrs={"class":"iaLabel"}).text)
@@ -104,6 +118,8 @@ if count != 0:
 			print(j.get_link())
 			print()
 			print()
+			if not_unique_count != 0:
+				print('There were ' + not_unique_count + ' jobs that were not unique in this search')
 		print('LIST OF JOBS NOT INCLUDED, not classified as "Apply instantly." There were a total of ' + str(jobs_not_included) + ' that did not match your criteria.')
 		print(jobs_not_in)
 else:
