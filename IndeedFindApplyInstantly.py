@@ -65,7 +65,7 @@ def find_jobs(location,job_type,number_of_searches):
 		#check each card in the list of cards
 		for card in click_cards:
 
-			#checking if card has the 'Apply instantly' label
+			#checking if card has the 'Apply instantly' label and making sure it is not empty
 			if card.find('span',attrs={"class":"iaLabel"}) is not None and card.find('span',attrs={"class":"iaLabel"}).text == 'Apply instantly':
 
 				#find the job title if it does
@@ -127,3 +127,12 @@ else:
 
 
 
+#def auto_apply():
+
+
+
+
+apply = input('Would you like us to assist you in applying to these jobs automatically: Y/N')
+	#if apply == 'Y' or apply == 'y'
+
+		#CALL THE APPLY FUNCTION HERE
