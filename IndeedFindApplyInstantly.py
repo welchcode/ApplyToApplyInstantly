@@ -83,7 +83,6 @@ def find_jobs(location,job_type,number_of_searches):
 				job_link = 'http://www.indeed.com'+a['href']
 				
 				company_name = card.find('span', attrs={"class":"company"}).text.strip()
-				print(company_name)
 
 				#checking if job_link is already in the list
 				if job_list:
@@ -123,7 +122,7 @@ if count != 0:
 	if view == 'V':
 		for j in job_list:
 			print(j.get_title())
-			print(j.get_company_name)
+			print(j.get_company_name())
 			print(j.get_link())
 			print()
 			print()
