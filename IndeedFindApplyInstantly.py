@@ -13,6 +13,7 @@ start = 10
 #used to count number of jobs
 count = 0
 
+
 #number of jobs that have the same job link returned from the list -> this happens rarely (if at all)
 not_unique_count = 0
 
@@ -37,15 +38,19 @@ job_list = []
 
 
 class Job:
-	def __init__(self,job_title,job_link):
+	def __init__(self,job_title,job_link,company_name):
 		self.job_title = job_title
 		self.job_link = job_link
+		self.company_name = company_name
 
 	def get_title(self):
 		return self.job_title
 
 	def get_link(self):
 		return self.job_link
+
+	def get_company_name(self):
+		return self.company_name
 
 
 def find_jobs(location,job_type,number_of_searches):
@@ -76,6 +81,9 @@ def find_jobs(location,job_type,number_of_searches):
 
 				#link for job
 				job_link = 'http://www.indeed.com'+a['href']
+				
+				company_name = card.find('span', attrs={"class":"company"}).text.strip()
+				print(company_name)
 
 				#checking if job_link is already in the list
 				if job_list:
@@ -88,7 +96,7 @@ def find_jobs(location,job_type,number_of_searches):
 
 				#creating object of job and adding it to the list of objects
 				if unique_link == True or not job_list:
-					j = Job(job_title,job_link)	
+					j = Job(job_title,job_link,company_name)	
 					job_list.append(j)
 	
 							
@@ -115,6 +123,7 @@ if count != 0:
 	if view == 'V':
 		for j in job_list:
 			print(j.get_title())
+			print(j.get_company_name)
 			print(j.get_link())
 			print()
 			print()
@@ -126,6 +135,9 @@ else:
 	print('No jobs were found matching your criteria, please try again')
 
 
+
+
+	
 
 #def auto_apply():
 
